@@ -9,7 +9,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Ruta principal
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'index.html'));
+  //res.sendFile(path.join(__dirname, 'views', 'index.html'));
+  throw new Error('Error intencionado en producción');
 });
 
 // Ruta extra (para que no sea trivial)
