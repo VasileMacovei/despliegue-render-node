@@ -4,16 +4,13 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Servir archivos estáticos (CSS)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Ruta principal
 app.get('/', (req, res) => {
   //res.sendFile(path.join(__dirname, 'views', 'index.html'));
   throw new Error('Error intencionado en producción');
 });
 
-// Ruta extra (para que no sea trivial)
 app.get('/estado', (req, res) => {
   res.json({
     status: 'OK',
@@ -22,6 +19,11 @@ app.get('/estado', (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Servidor activo en el puerto ${PORT}`);
-});
+// Solo arrancar servidor si no estamos en tests
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`Servidor activo en el puerto ${PORT}`);
+  });
+}
+
+module.exports = app; // exportar para Supertest
