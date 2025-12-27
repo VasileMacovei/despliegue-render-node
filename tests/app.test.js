@@ -12,4 +12,4 @@ describe('Pruebas básicas de la app', () => {
     expect(res.statusCode).toBe(200);
     expect(res.body.status).toBe('OK');
   });
-});
+}); 
